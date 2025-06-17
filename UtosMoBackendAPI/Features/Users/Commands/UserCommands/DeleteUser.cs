@@ -24,12 +24,7 @@ namespace UtosMoBackendAPI.Features.Users.Commands.UserCommands
         {
             var deleteUser = await _userService.DeleteUser(request.id);
 
-            if(deleteUser.IsSuccess)
-            {
-                return Result.Success(deleteUser.Value);
-            }
-
-            return Result.Failure<string>(deleteUser.Error);
+            return deleteUser;
         }
         #endregion
     }

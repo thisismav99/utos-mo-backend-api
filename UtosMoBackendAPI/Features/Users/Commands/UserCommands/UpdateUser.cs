@@ -38,12 +38,7 @@ namespace UtosMoBackendAPI.Features.Users.Commands.UserCommands
 
             var updateUser = await _userService.UpdateUser(user);
 
-            if (updateUser.IsSuccess)
-            {
-                return Result.Success(updateUser.Value);
-            }
-
-            return Result.Failure<string>(updateUser.Error);
+            return updateUser;
         }
         #endregion
     }
