@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using UtosMoBackendAPI.Features.Users.Commands.UserCommands;
 using UtosMoBackendAPI.Features.Users.DTO.Users;
 using UtosMoBackendAPI.Features.Users.Queries.UserQueries;
+using UtosMoBackendAPI.Features.Users.Utilities;
 
 namespace UtosMoBackendAPI.Features.Users.Controllers
 {
@@ -31,7 +33,7 @@ namespace UtosMoBackendAPI.Features.Users.Controllers
 
             if(result.IsFailure)
             {
-                return BadRequest(result.Error);
+                return NotFound();
             }
 
             return Ok(result.Value);
@@ -44,6 +46,11 @@ namespace UtosMoBackendAPI.Features.Users.Controllers
 
             var result = await _mediator.Send(command);
 
+            if (result.IsNullOrEmpty())
+            {
+                return NotFound();
+            }
+
             return Ok(result);
         }
 
@@ -54,12 +61,17 @@ namespace UtosMoBackendAPI.Features.Users.Controllers
 
             var result = await _mediator.Send(command);
 
-            if (result.IsFailure)
+            if (result.IsSuccess)
             {
-                return BadRequest(result.Error);
+                return CreatedAtAction(nameof(GetById), new { userId = result.Value.ID }, result.Value);
             }
 
-            return CreatedAtAction(nameof(GetById), new { userId = result.Value.ID }, result.Value);
+            if(result.Error == UserResultMessage.Exists)
+            {
+                return Conflict();
+            }
+
+            return BadRequest(result.Error);
         }
 
         [HttpDelete("{userId:guid}")]

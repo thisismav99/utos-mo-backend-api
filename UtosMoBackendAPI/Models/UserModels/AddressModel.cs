@@ -13,5 +13,7 @@
         public required string Region { get; set; }
 
         public required string Country { get; set; }
+
+        public Guid UserID { get; set; }
     }
 }

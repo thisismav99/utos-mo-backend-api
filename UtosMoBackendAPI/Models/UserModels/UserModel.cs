@@ -13,9 +13,5 @@
         public string? SocialMediaLink { get; set; }
 
         public bool IsVerified { get; set; }
-
-        public List<Guid>? EducationID { get; set; }
-
-        public Guid? AddressID { get; set; }
     }
 }

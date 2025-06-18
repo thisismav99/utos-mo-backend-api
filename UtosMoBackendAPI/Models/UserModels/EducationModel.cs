@@ -14,8 +14,6 @@
 
         public bool HasGraduated { get; set; }
 
-        public bool HasHonors { get; set; }
-
-        public List<Guid>? HonorID { get; set; }
+        public Guid UserID { get; set; }
     }
 }

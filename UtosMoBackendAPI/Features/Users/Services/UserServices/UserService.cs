@@ -22,11 +22,11 @@ namespace UtosMoBackendAPI.Features.Users.Services.UserServices
         #region Methods
         public async Task<Result<UserModel>> AddUser(UserModel user)
         {
-            var userExists = await _repository.GetBy(x => x!.FirstName == user.FirstName &&
-                                                          x.MiddleName == user.MiddleName &&
-                                                          x.LastName == user.LastName);
+            var userExists = await _repository.HasMatch(x => x!.FirstName == user.FirstName &&
+                                                             x.MiddleName == user.MiddleName &&
+                                                             x.LastName == user.LastName);
 
-            if (userExists is not null)
+            if (userExists)
             {
                 return Result.Failure<UserModel>(UserResultMessage.Exists);
             }
@@ -71,16 +71,16 @@ namespace UtosMoBackendAPI.Features.Users.Services.UserServices
 
         public async Task<Result<string>> UpdateUser(UserModel user)
         {
-            var isTheSame = await _repository.HasMatch(x => x.ID == user.ID &&
-                                                            x.FirstName == user.FirstName &&
-                                                            x.MiddleName == user.MiddleName &&
-                                                            x.LastName == user.LastName &&
-                                                            x.ContactNumber == user.ContactNumber &&
-                                                            x.SocialMediaLink == user.SocialMediaLink &&
-                                                            x.IsVerified == user.IsVerified &&
-                                                            x.IsActive == user.IsActive);
+            var isExactUser = await _repository.HasMatch(x => x.ID == user.ID &&
+                                                              x.FirstName == user.FirstName &&
+                                                              x.MiddleName == user.MiddleName &&
+                                                              x.LastName == user.LastName &&
+                                                              x.ContactNumber == user.ContactNumber &&
+                                                              x.SocialMediaLink == user.SocialMediaLink &&
+                                                              x.IsVerified == user.IsVerified &&
+                                                              x.IsActive == user.IsActive);
 
-            if (isTheSame)
+            if (isExactUser)
             {
                 return Result.Failure<string>(UserResultMessage.NoChanges);
             }
