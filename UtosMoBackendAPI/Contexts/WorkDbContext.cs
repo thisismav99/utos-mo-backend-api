@@ -5,14 +5,27 @@ namespace UtosMoBackendAPI.Contexts
 {
     public class WorkDbContext : DbContext
     {
-        public WorkDbContext(DbContextOptions<WorkDbContext> dbContextOptions)
-            : base(dbContextOptions)
-        {
-            
-        }
+        public WorkDbContext(DbContextOptions<WorkDbContext> dbContextOptions) : base(dbContextOptions) { }
 
         public DbSet<WorkModel> Work { get; set; }
 
         public DbSet<IndustryModel> Industry { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<WorkModel>()
+                .HasMany(w => w.Industries)
+                .WithMany(i => i.Works)
+                .UsingEntity<Dictionary<string, object>>(
+                    "WorkIndustries",
+                    x => x.HasOne<IndustryModel>().WithMany().HasForeignKey("IndustryID"),
+                    x => x.HasOne<WorkModel>().WithMany().HasForeignKey("WorkID"),
+                    x =>
+                    {
+                        x.HasKey("WorkID", "IndustryID");
+                        x.ToTable("WorkIndustries");
+                    }
+                );
+        }
     }
 }

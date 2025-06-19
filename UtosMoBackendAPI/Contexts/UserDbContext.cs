@@ -5,11 +5,7 @@ namespace UtosMoBackendAPI.Contexts
 {
     public class UserDbContext : DbContext
     {
-        public UserDbContext(DbContextOptions<UserDbContext> dbContextOptions) 
-            : base(dbContextOptions)
-        {
-            
-        }
+        public UserDbContext(DbContextOptions<UserDbContext> dbContextOptions) : base(dbContextOptions) { }
 
         public DbSet<UserModel> User { get; set; }
 

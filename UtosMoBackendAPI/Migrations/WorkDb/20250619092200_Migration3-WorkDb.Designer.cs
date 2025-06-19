@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UtosMoBackendAPI.Contexts;
 
@@ -11,9 +12,11 @@ using UtosMoBackendAPI.Contexts;
 namespace UtosMoBackendAPI.Migrations.WorkDb
 {
     [DbContext(typeof(WorkDbContext))]
-    partial class WorkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250619092200_Migration3-WorkDb")]
+    partial class Migration3WorkDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace UtosMoBackendAPI.Migrations.WorkDb
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("IndustryModelWorkModel", b =>
+                {
+                    b.Property<Guid>("IndustriesID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("WorksID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("IndustriesID", "WorksID");
+
+                    b.HasIndex("WorksID");
+
+                    b.ToTable("WorkIndustries", (string)null);
+                });
 
             modelBuilder.Entity("UtosMoBackendAPI.Models.WorkModels.IndustryModel", b =>
                 {
@@ -81,32 +99,17 @@ namespace UtosMoBackendAPI.Migrations.WorkDb
                     b.ToTable("Work");
                 });
 
-            modelBuilder.Entity("WorkIndustries", b =>
-                {
-                    b.Property<Guid>("WorkID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IndustryID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("WorkID", "IndustryID");
-
-                    b.HasIndex("IndustryID");
-
-                    b.ToTable("WorkIndustries", (string)null);
-                });
-
-            modelBuilder.Entity("WorkIndustries", b =>
+            modelBuilder.Entity("IndustryModelWorkModel", b =>
                 {
                     b.HasOne("UtosMoBackendAPI.Models.WorkModels.IndustryModel", null)
                         .WithMany()
-                        .HasForeignKey("IndustryID")
+                        .HasForeignKey("IndustriesID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("UtosMoBackendAPI.Models.WorkModels.WorkModel", null)
                         .WithMany()
-                        .HasForeignKey("WorkID")
+                        .HasForeignKey("WorksID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

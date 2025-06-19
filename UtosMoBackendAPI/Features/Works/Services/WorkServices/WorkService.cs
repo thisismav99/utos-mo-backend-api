@@ -24,7 +24,6 @@ namespace UtosMoBackendAPI.Features.Works.Services.WorkServices
         {
             var isWorkExists = await _repository.HasMatch(x => x.Title == work.Title &&
                                                                x.YearsExperience == work.YearsExperience &&
-                                                               x.IndustryID == work.IndustryID &&
                                                                x.UserID == work.UserID);
 
             if(isWorkExists)
@@ -70,7 +69,6 @@ namespace UtosMoBackendAPI.Features.Works.Services.WorkServices
                                                               x.YearsExperience == work.YearsExperience &&
                                                               x.IsCredited == work.IsCredited &&
                                                               x.IsActive == work.IsActive &&
-                                                              x.IndustryID == work.IndustryID &&
                                                               x.UserID == work.UserID);
 
             if(isExactWork)
