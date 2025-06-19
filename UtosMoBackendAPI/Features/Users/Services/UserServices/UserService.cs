@@ -38,11 +38,11 @@ namespace UtosMoBackendAPI.Features.Users.Services.UserServices
 
         public async Task<Result<string>> DeleteUser(Guid userId)
         {
-            var userExists = await _repository.GetById(userId);
+            var user = await _repository.GetById(userId);
 
-            if (userExists is not null)
+            if (user is not null)
             {
-                await _repository.Delete(userExists);
+                await _repository.Delete(user);
 
                 return Result.Success(UserResultMessage.Removed);
             }
@@ -57,11 +57,11 @@ namespace UtosMoBackendAPI.Features.Users.Services.UserServices
 
         public async Task<Result<UserModel?>> GetUserById(Guid userId)
         {
-            var userExists = await _repository.GetById(userId);
+            var user = await _repository.GetById(userId);
 
-            if (userExists is not null)
+            if (user is not null)
             {
-                return Result.Success<UserModel?>(userExists);
+                return Result.Success<UserModel?>(user);
             }
             else
             {

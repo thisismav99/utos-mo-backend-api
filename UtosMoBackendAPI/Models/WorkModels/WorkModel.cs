@@ -8,6 +8,8 @@
 
         public bool IsCredited { get; set; }
 
+        public Guid IndustryID { get; set; }
+
         public Guid UserID { get; set; }
     }
 }

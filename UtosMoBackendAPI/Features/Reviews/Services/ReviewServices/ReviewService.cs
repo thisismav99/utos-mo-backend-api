@@ -46,26 +46,26 @@ namespace UtosMoBackendAPI.Features.Reviews.Services.ReviewServices
 
         public async Task<Result<List<ReviewModel>?>> GetAllReviewsByUserId(Guid userId)
         {
-            var reviewExists = await _repository.GetAllBy(x => x.UserID == userId);
+            var reviewsByUserId = await _repository.GetAllBy(x => x.UserID == userId);
 
-            if(reviewExists is null)
+            if(reviewsByUserId is null)
             {
                 return Result.Failure<List<ReviewModel>?>(ReviewResultMessage.NotFound);
             }
 
-            return Result.Success<List<ReviewModel>?>(reviewExists);
+            return Result.Success<List<ReviewModel>?>(reviewsByUserId);
         }
 
         public async Task<Result<ReviewModel?>> GetReviewById(Guid reviewId)
         {
-            var reviewExists = await _repository.GetById(reviewId);
+            var review = await _repository.GetById(reviewId);
 
-            if(reviewExists is null)
+            if(review is null)
             {
                 return Result.Failure<ReviewModel?>(ReviewResultMessage.NotFound);
             }
 
-            return Result.Success<ReviewModel?>(reviewExists);
+            return Result.Success<ReviewModel?>(review);
         }
 
         public async Task<Result<string>> UpdateReview(ReviewModel review)
