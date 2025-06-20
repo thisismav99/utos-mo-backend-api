@@ -7,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.RegisterUserDbContext(builder.Configuration.GetConnectionString("UtosMoUserDb")!);
 builder.Services.RegisterReviewDbContext(builder.Configuration.GetConnectionString("UtosMoReviewDb")!);
-builder.Services.RegisterWorkDbContext(builder.Configuration.GetConnectionString("UtosMoWorkDb")!);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -17,9 +16,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<Program>());
 
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
-builder.Services.RegisterUserService();
+builder.Services.RegisterUserServices();
 builder.Services.RegisterReviewService();
-builder.Services.RegisterWorkService();
 
 var app = builder.Build();
 

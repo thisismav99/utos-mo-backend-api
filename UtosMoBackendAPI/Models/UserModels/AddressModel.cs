@@ -32,6 +32,6 @@ namespace UtosMoBackendAPI.Models.UserModels
 
         public Guid UserID { get; set; }
 
-        public required UserModel User { get; set; }
+        public UserModel? User { get; set; }
     }
 }

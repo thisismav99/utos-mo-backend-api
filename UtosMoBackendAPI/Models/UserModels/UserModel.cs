@@ -27,5 +27,9 @@ namespace UtosMoBackendAPI.Models.UserModels
         public List<AddressModel>? Addresses { get; set; }
 
         public List<EducationModel>? Educations { get; set; }
+
+        public SalaryModel? Salary { get; set; }
+
+        public List<WorkModel>? Works { get; set; }
     }
 }
