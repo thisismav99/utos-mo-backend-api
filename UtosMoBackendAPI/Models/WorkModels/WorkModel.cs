@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using UtosMoBackendAPI.Models.UserModels;
 
 namespace UtosMoBackendAPI.Models.WorkModels
 {

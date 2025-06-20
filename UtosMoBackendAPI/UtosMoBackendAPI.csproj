@@ -19,11 +19,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Works\DTO\" />
-    <Folder Include="Features\Works\Commands\" />
-    <Folder Include="Features\Works\Controllers\" />
-    <Folder Include="Features\Works\Queries\" />
-  </ItemGroup>
-
 </Project>

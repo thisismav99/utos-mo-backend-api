@@ -27,9 +27,9 @@ namespace UtosMoBackendAPI.Features.Reviews.Controllers
         [HttpGet("{reviewId:guid}")]
         public async Task<IActionResult> GetById(Guid reviewId)
         {
-            var command = new GetReviewByIdQuery(reviewId);
+            var query = new GetReviewByIdQuery(reviewId);
 
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(query);
 
             if(result.IsSuccess)
             {
@@ -42,9 +42,9 @@ namespace UtosMoBackendAPI.Features.Reviews.Controllers
         [HttpGet("~/api/Reviews/{userId:guid}")]
         public async Task<IActionResult> GetAllBy(Guid userId)
         {
-            var command = new GetReviewsByUserIdQuery(userId);
+            var query = new GetReviewsByUserIdQuery(userId);
 
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(query);
 
             if(result.IsSuccess && !result.Value.IsNullOrEmpty())
             {
@@ -59,7 +59,7 @@ namespace UtosMoBackendAPI.Features.Reviews.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddReviewRequest addReviewRequest)
+        public async Task<IActionResult> AddReview(AddReviewRequest addReviewRequest)
         {
             var command = new AddReviewCommand(addReviewRequest);
 
@@ -79,7 +79,7 @@ namespace UtosMoBackendAPI.Features.Reviews.Controllers
         }
 
         [HttpPut("{reviewId:guid}")]
-        public async Task<IActionResult> Update(Guid reviewId, UpdateReviewRequest updateReviewRequest)
+        public async Task<IActionResult> UpdateReview(Guid reviewId, UpdateReviewRequest updateReviewRequest)
         {
             var command = new UpdateReviewCommand(reviewId, updateReviewRequest);
 

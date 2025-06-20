@@ -27,9 +27,9 @@ namespace UtosMoBackendAPI.Features.Users.Controllers
         [HttpGet("{userId:guid}")]
         public async Task<IActionResult> GetById(Guid userId)
         {
-            var command = new GetUserByIdQuery(userId);
+            var query = new GetUserByIdQuery(userId);
 
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(query);
 
             if(result.IsFailure)
             {
@@ -42,9 +42,9 @@ namespace UtosMoBackendAPI.Features.Users.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var command = new GetUsersQuery();
+            var query = new GetUsersQuery();
 
-            var result = await _mediator.Send(command);
+            var result = await _mediator.Send(query);
 
             if (result.IsNullOrEmpty())
             {
@@ -55,7 +55,7 @@ namespace UtosMoBackendAPI.Features.Users.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody]AddUserRequest addUserRequest)
+        public async Task<IActionResult> AddUser([FromBody]AddUserRequest addUserRequest)
         {
             var command = new AddUserCommand(addUserRequest);
 
@@ -75,7 +75,7 @@ namespace UtosMoBackendAPI.Features.Users.Controllers
         }
 
         [HttpDelete("{userId:guid}")]
-        public async Task<IActionResult> Delete(Guid userId)
+        public async Task<IActionResult> DeleteUser(Guid userId)
         {
             var command = new DeleteUserCommand(userId);
 
@@ -90,7 +90,7 @@ namespace UtosMoBackendAPI.Features.Users.Controllers
         }
 
         [HttpPut("{userId:guid}")]
-        public async Task<IActionResult> Update(Guid userId, [FromBody]UpdateUserRequest updateUserRequest)
+        public async Task<IActionResult> UpdateUser(Guid userId, [FromBody]UpdateUserRequest updateUserRequest)
         {
             var command = new UpdateUserCommand(userId, updateUserRequest);
 
