@@ -32,7 +32,7 @@ namespace UtosMoBackendAPI.Features.Reviews.Services.ReviewServices
                 return Result.Failure<ReviewModel>(ReviewResultMessage.Exists);
             }
 
-            var validateRating = ReviewValidationHelper<ReviewModel>.ValidateRating(review.Rating);
+            var validateRating = ReviewUtility<ReviewModel>.ValidateRating(review.Rating);
 
             if (validateRating.IsFailure)
             {
@@ -81,7 +81,7 @@ namespace UtosMoBackendAPI.Features.Reviews.Services.ReviewServices
                 return Result.Failure<string>(ReviewResultMessage.NoChanges);
             }
 
-            var validateRating = ReviewValidationHelper<string>.ValidateRating(review.Rating);
+            var validateRating = ReviewUtility<string>.ValidateRating(review.Rating);
 
             if (validateRating.IsFailure)
             {

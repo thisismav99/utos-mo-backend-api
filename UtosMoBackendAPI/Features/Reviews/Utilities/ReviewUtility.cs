@@ -2,7 +2,7 @@
 
 namespace UtosMoBackendAPI.Features.Reviews.Utilities
 {
-    public static class ReviewValidationHelper<T> where T : class
+    public static class ReviewUtility<T> where T : class
     {
         public static Result<T> ValidateRating(int rating)
         {

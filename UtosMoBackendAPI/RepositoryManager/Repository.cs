@@ -38,14 +38,14 @@ namespace UtosMoBackendAPI.RepositoryManager
             return await _dbSetModel.ToListAsync();
         }
 
-        public async Task<List<TModel>?> GetAllBy(Expression<Func<TModel, bool>> predicate)
+        public async Task<List<TModel>?> GetAllBy(Expression<Func<TModel, bool>> condition)
         {
-            return await _dbSetModel.Where(predicate).ToListAsync();
+            return await _dbSetModel.Where(condition).ToListAsync();
         }
 
-        public async Task<TModel?> GetBy(Expression<Func<TModel?, bool>> predicate)
+        public async Task<TModel?> GetBy(Expression<Func<TModel?, bool>> condition)
         {
-            return await _dbSetModel.Where(predicate).FirstOrDefaultAsync();
+            return await _dbSetModel.Where(condition).FirstOrDefaultAsync();
         }
 
         public async Task<TModel?> GetById(Guid id)
@@ -53,9 +53,14 @@ namespace UtosMoBackendAPI.RepositoryManager
             return await _dbSetModel.FindAsync(id);
         }
 
-        public async Task<bool> HasMatch(Expression<Func<TModel, bool>> predicate)
+        public async Task<TModel?> GetLatestBy<TKey>(Expression<Func<TModel, TKey>> column)
         {
-            return await _dbSetModel.AnyAsync(predicate);
+            return await _dbSetModel.OrderByDescending(column).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> HasMatch(Expression<Func<TModel, bool>> condition)
+        {
+            return await _dbSetModel.AnyAsync(condition);
         }
 
         public async Task Update(TModel model)

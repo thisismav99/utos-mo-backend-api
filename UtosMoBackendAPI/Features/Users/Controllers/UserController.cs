@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Annotations;
 using UtosMoBackendAPI.Features.Users.Commands.UserCommands;
 using UtosMoBackendAPI.Features.Users.DTO.Users;
 using UtosMoBackendAPI.Features.Users.Queries.UserQueries;
@@ -10,6 +11,7 @@ namespace UtosMoBackendAPI.Features.Users.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [SwaggerTag("User")]
     public class UserController : ControllerBase
     {
         #region Variables

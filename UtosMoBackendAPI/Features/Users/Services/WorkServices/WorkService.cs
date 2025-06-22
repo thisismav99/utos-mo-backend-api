@@ -50,16 +50,16 @@ namespace UtosMoBackendAPI.Features.Users.Services.WorkServices
             return Result.Failure<string>(WorkResultMessage.NotFound);
         }
 
-        public async Task<Result<WorkModel>> GetWorkById(Guid workId)
+        public async Task<Result<WorkModel?>> GetWorkById(Guid workId)
         {
             var work = await _repository.GetById(workId);
 
             if (work is not null)
             {
-                return Result.Success(work);
+                return Result.Success<WorkModel?>(work);
             }
 
-            return Result.Failure<WorkModel>(WorkResultMessage.NotFound);
+            return Result.Failure<WorkModel?>(WorkResultMessage.NotFound);
         }
 
         public async Task<Result<string>> UpdateWork(WorkModel work)

@@ -12,5 +12,7 @@ namespace UtosMoBackendAPI.Models.BookingModels
 
         [Required]
         public DateTime BookingDate { get; set; }
+
+        public TransactionModel? Transaction { get; set; }
     }
 }

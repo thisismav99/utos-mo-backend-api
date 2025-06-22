@@ -48,16 +48,16 @@ namespace UtosMoBackendAPI.Features.Users.Services.IndustryServices
             return Result.Failure<string>(IndustryResultMessage.NotFound);
         }
 
-        public async Task<Result<IndustryModel>> GetIndustryById(Guid industryId)
+        public async Task<Result<IndustryModel?>> GetIndustryById(Guid industryId)
         {
             var industry = await _repository.GetById(industryId);
 
             if (industry is not null)
             {
-                return Result.Success(industry);
+                return Result.Success<IndustryModel?>(industry);
             }
 
-            return Result.Failure<IndustryModel>(IndustryResultMessage.NotFound);
+            return Result.Failure<IndustryModel?>(IndustryResultMessage.NotFound);
         }
 
         public async Task<Result<string>> UpdateIndustry(IndustryModel industry)

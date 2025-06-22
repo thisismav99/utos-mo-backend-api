@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using UtosMoBackendAPI.Features.Users.Commands.IndustryCommands;
 using UtosMoBackendAPI.Features.Users.DTO.Industries;
 using UtosMoBackendAPI.Features.Users.Queries.IndustryQueries;
@@ -8,6 +9,7 @@ namespace UtosMoBackendAPI.Features.Users.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [SwaggerTag("User")]
     public class IndustryController : ControllerBase
     {
         #region Variables

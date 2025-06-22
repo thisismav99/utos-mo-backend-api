@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using UtosMoBackendAPI.Features.Users.Commands.WorkCommands;
 using UtosMoBackendAPI.Features.Users.DTO.Works;
 using UtosMoBackendAPI.Features.Users.Queries.WorkQueries;
@@ -8,6 +9,7 @@ namespace UtosMoBackendAPI.Features.Users.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [SwaggerTag("User")]
     public class WorkController : ControllerBase
     {
         #region Variables
